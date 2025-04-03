@@ -1,0 +1,72 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Consumption Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { max-width: 600px; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .header { background: #004953; color: #ffffff; padding: 15px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { padding: 20px; color: #333; }
+        .footer { text-align: center; font-size: 12px; padding: 10px; color: #666; }
+        .highlight { font-weight: bold; color: #004953; }
+        .btn { display: inline-block; padding: 10px 15px; background: #004953; color: #ffffff; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Weekly Consumption Report</h2>
+        </div>
+        <div class="content">
+            <p>Dear <strong>[Customer Name],</strong></p>
+            <p>Your energy and gas consumption report for the week of <strong>[Current Week Date]</strong> is now available. Below is a comparison of your usage this week with your previous week and lifetime weekly average.</p>
+
+            <h3>Electricity Consumption:</h3>
+            <ul>
+                <li><strong>This Week’s Usage:</strong> <span class="highlight">{{Curnt_Usage_elc}} kWh</span></li>
+                <li><strong>Last Week’s Usage:</strong> <span class="highlight">{{Prv_Usage_elc}} kWh</span></li>
+                <li><strong>Lifetime Weekly Average:</strong> <span class="highlight">{{lftm_elc}} kWh</span></li>
+                <li><strong>Change Compared to Last Week:</strong> <span class="highlight">{{elc_percentage}} %</span></li>
+            </ul>
+            <p>A <span class="highlight">{{elc_change}} %</span> increase/decrease in your electricity usage means you are using more/less energy compared to the previous week.</p>
+            <p>You are in the <span class="highlight">{{elc_percentile}} %</span> percentile for electricity consumption, meaning you are using less/more electricity than <span class="highlight">_ %</span> of households.</p>
+
+            <h3>Water Consumption:</h3>
+            <ul>
+                <li><strong>This Week’s Water Usage:</strong> <span class="highlight">_ Liters</span></li>
+                <li><strong>Last Week’s Water Usage:</strong> <span class="highlight">_ Liters</span></li>
+                <li><strong>Lifetime Weekly Average:</strong> <span class="highlight">_ Liters</span></li>
+                <li><strong>Change Compared to Last Week:</strong> <span class="highlight">_ %</span></li>
+            </ul>
+            <p>A <span class="highlight">_ %</span> increase/decrease in your water usage means you are using more/less water compared to the previous week.</p>
+            <p>You are in the <span class="highlight">_ %</span> percentile for water usage, placing you in the top/bottom <span class="highlight">_ %</span> of users in terms of water efficiency.</p>
+
+            <h3>Gas Consumption:</h3>
+            <ul>
+                <li><strong>This Week’s Gas Usage:</strong> <span class="highlight">_ m³</span></li>
+                <li><strong>Last Week’s Gas Usage:</strong> <span class="highlight">_ m³</span></li>
+                <li><strong>Lifetime Weekly Average:</strong> <span class="highlight">_ m³</span></li>
+                <li><strong>Change Compared to Last Week:</strong> <span class="highlight">_ %</span></li>
+            </ul>
+            <p>A <span class="highlight">_ %</span> increase/decrease in your gas usage indicates that your heating and hot water needs have changed.</p>
+            <p>You are in the <span class="highlight">_ %</span> percentile for gas consumption, which places you higher/lower in comparison to other households.</p>
+
+            <h3>Energy Saving Tips:</h3>
+            <ul>
+                <li>Reduce your heating to save on gas consumption.</li>
+                <li>Turn off electrical appliances when not in use to reduce electricity waste.</li>
+                <li>Opt for energy-efficient appliances to lower future bills.</li>
+                <li>Limit water consumption by making sure taps are not running unnecessarily.</li>
+            </ul>
+            <p>If you would like more insights or detailed information, please visit your <a href="[Dashboard Link]" class="btn">dashboard</a>.</p>
+        </div>
+        <div class="footer">
+            <p>Thank you for using our Smart Meter service!</p>
+        </div>
+    </div>
+</body>
+</html>
