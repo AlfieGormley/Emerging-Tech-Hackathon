@@ -27,7 +27,7 @@ def occupant_email(data):
         template = Template(file.read())
     #content = {"Curnt_Usage_elk": Curnt_Usage_elc, "Prv_Usage_elk": Prv_Usage_elc, }
     html_body = template.render(data)
-    creds = email_creds("ewanbeale2nd@gmail.com", "paying too much!", html_body )
+    creds = email_creds("ewanbeale2nd@gmail.com", "paying too much!", html_body)
     send_email(creds)
 
 def email_creds(receiver, sub, bdy):

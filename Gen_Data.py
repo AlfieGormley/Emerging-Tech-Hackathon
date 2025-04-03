@@ -119,9 +119,6 @@ def simulation(household_id):
     print("Percentage Change In Water", percentage_change_water)
     
     
-    
-    
-        
     #Collect Weekly Averages
     weekly_averages, sorted_households = all_time_weekly_average()
     
@@ -234,14 +231,14 @@ def main(i):
     
     print(percentage_changes)
     
-    weekly_averages, sorted_households = all_time_weekly_average()
+    #weekly_averages, sorted_households = all_time_weekly_average()
     
     #print(weekly_averages)
     #print(sorted_households)
     
     
 
-    return 
+    return percentage_changes
     
     
 
