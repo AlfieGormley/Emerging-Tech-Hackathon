@@ -121,38 +121,6 @@ def simulation(household_id):
     
     
     
-    
-    
-    # Respond based on the percentage change
-    if percentage_change_gas < 0:
-        print("Well done, you saved gas")
-    elif percentage_change_gas > 0:
-        print("Gas usage has increased")
-    elif percentage_change_gas > 10:
-        print("🚨 Gas usage has increased significantly! Investigate for possible issues.")
-    elif percentage_change_gas < -10:
-        print("✅ Gas usage has decreased significantly. Great job on saving!")
-        
-    
-    if percentage_change_electric < 0:
-        print("Well done you saved electric")
-    elif percentage_change_electric > 0:
-        print("Electric usage has increased")
-    elif percentage_change_electric > 10:
-        print("🚨 Electric usage has increased significantly! Check for issues.")
-    elif percentage_change_electric < -10:
-        print("✅ Electric usage has decreased significantly. Great energy saving!")
-    
-    
-    # Check if water usage has decreased (negative percentage change)
-    if percentage_change_water < 0:
-        print("💧 Well done, you saved water!")
-    elif percentage_change_water > 0:
-        print("💧 Water usage has increased")
-    elif percentage_change_water > 10:
-        print("🚨 Water usage has increased significantly. Consider investigating for leaks.")
-    elif percentage_change_water < -10:
-        print("✅ Water usage has decreased significantly. Great job conserving water!")
         
     #Collect Weekly Averages
     weekly_averages, sorted_households = all_time_weekly_average()
@@ -175,6 +143,7 @@ def simulation(household_id):
         "weekly_water_usage": current_total_water_usage,
         
         "household_rank": rank
+        
         
     }
     
