@@ -118,6 +118,11 @@ def simulation(household_id):
     print("Percentage Change In Electric", percentage_change_electric)
     print("Percentage Change In Water", percentage_change_water)
     
+    
+    
+    
+    
+    
     # Respond based on the percentage change
     if percentage_change_gas < 0:
         print("Well done, you saved gas")
@@ -149,20 +154,101 @@ def simulation(household_id):
     elif percentage_change_water < -10:
         print("✅ Water usage has decreased significantly. Great job conserving water!")
         
-    #Output as an array with
+    #Collect Weekly Averages
+    weekly_averages, sorted_households = all_time_weekly_average()
+    
+    #Find Rank
+    rank = find_household_index(household_id, sorted_households) + 1
+    
+    
     
     percentage_changes = {
         "gas_usage_percentage_change": percentage_change_gas,
+        "weekly_gas_usage": current_total_gas_usage,
+        
+        
         "electric_usage_percentage_change": percentage_change_electric,
-        "water_usage_percentage_change": percentage_change_water
+        "weekly_electric_usage": current_total_electric_usage,
+        
+        
+        "water_usage_percentage_change": percentage_change_water,
+        "weekly_water_usage": current_total_water_usage,
+        
+        "household_rank": rank
+        
     }
     
     
     return percentage_changes
 
     
-    
 
+def find_household_index(search_id, sorted_households):
+        for index, (household_id, data) in enumerate(sorted_households.items()):
+            
+            if household_id == search_id:
+                return index  # Return the index of the matched household
+            
+        return -1  # Return -1 if the household is not found
+
+
+
+
+
+#Calculates Weekly Averages And Sorts By Total Energy Consumption
+def all_time_weekly_average():
+    
+    all_households = households_collection.find()
+    
+    household_weekly_averages = {}
+    
+    
+    for household in all_households:
+        household_id = household["_id"]
+        readings = household.get('readings', [])
+        
+        
+        num_weeks = len(readings) // 7  # Number of full weeks available
+        
+        if num_weeks == 0:
+            continue  # Skip households with less than 7 days of data
+        
+        total_gas = sum(r["gas_usage_kwh"] for r in readings) / num_weeks
+        total_electric = sum(r["electric_usage_kwh"] for r in readings) / num_weeks
+        total_water = sum(r["water_usage_liters"] for r in readings) / num_weeks
+        total_usage = total_gas + total_electric + total_water
+        
+        
+        # Store in the dictionary with the _id as the key
+        household_weekly_averages[household_id] = {
+            "average_weekly_gas_usage": total_gas,
+            "average_weekly_electric_usage": total_electric,
+            "average_weekly_water_usage": total_water,
+            "total_energy_consumption": total_usage
+        }
+        
+    sorted_households = dict(sorted(household_weekly_averages.items(), key=lambda x: x[1]['total_energy_consumption']))
+        
+    return household_weekly_averages, sorted_households
+                
+    
+    
+def get_household_info(household_id, ranked_households):
+    
+    
+    if household_id in ranked_households:
+        info = ranked_households[household_id]
+        return {
+            'rank': info['rank'],
+            'average_weekly_gas_usage': info['average_weekly_gas_usage'],
+            'average_weekly_electric_usage': info['average_weekly_electric_usage'],
+            'average_weekly_water_usage': info['average_weekly_water_usage'],
+            'total_energy_consumption': info['total_energy_consumption']
+        }
+    else:
+        return "Household ID not found."
+
+    
 
 
 
@@ -178,6 +264,11 @@ def main(i):
     percentage_changes = simulation("87420e90f0a5412fa6df30557ec17bf6")
     
     print(percentage_changes)
+    
+    weekly_averages, sorted_households = all_time_weekly_average()
+    
+    #print(weekly_averages)
+    #print(sorted_households)
     
     
 
