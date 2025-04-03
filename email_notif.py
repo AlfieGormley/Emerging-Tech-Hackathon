@@ -1,14 +1,36 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from jinja2 import Template
+
+Curnt_Usage_elc = 1
+Prv_Usage_elc = 1
+lftm_elc = None
+elc_percentage = None
+elc_change = None
+elc_percentile = 20
 
 
 def main(score):
     if score < 50:
-        creds = email_creds("councilhackaton@gmail.com","EXPENSIVE!!", "this bum using to much enrgy")
-        send_email(creds)
-    creds = email_creds("ewanbeale2nd@gmail.com", "paying too much!", "stop it ")
+        council_email()
+    occupant_email()
+
+def council_email():
+    creds = email_creds("councilhackaton@gmail.com","EXPENSIVE!!", "this bum using to much enrgy")
     send_email(creds)
+
+def occupant_email():
+    create_body()
+    with open("Email.html", "r", encoding="utf-8") as file:
+        template = Template(file.read())
+    content = {"Curnt_Usage_elk": Curnt_Usage_elc, "Prv_Usage_elk": Prv_Usage_elc, }
+    html_body = template.render(content)
+    creds = email_creds("ewanbeale2nd@gmail.com", "paying too much!", html_body )
+    send_email(creds)
+
+
+
 
 def email_creds(receiver, sub, bdy):
     receiver_email = receiver  # Receiver's email address
@@ -16,6 +38,10 @@ def email_creds(receiver, sub, bdy):
     body = bdy
 
     return receiver_email, subject, body
+
+def create_body():
+    pass
+
 
 def send_email(creds):
     # Create a multipart message and set headers
@@ -25,7 +51,7 @@ def send_email(creds):
     message["Subject"] = creds[1]
 
     # Add body to email
-    message.attach(MIMEText(creds[2], "plain"))
+    message.attach(MIMEText(creds[2], "html"))
 
     # Send email using Gmail's SMTP server
     try:
@@ -44,4 +70,4 @@ def send_email(creds):
         server.quit()  # Close the connection to the server
 
 if __name__ == "__main__":
-    main(40)
+    main(60)
